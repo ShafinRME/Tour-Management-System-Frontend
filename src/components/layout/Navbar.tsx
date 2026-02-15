@@ -13,6 +13,12 @@ import {
 } from "@/components/ui/popover";
 import { ModeToggle } from "./ModeToggler";
 import { Link } from "react-router";
+import {
+    authApi,
+    useLogoutMutation,
+    useUserInfoQuery,
+} from "@/redux/features/auth/auth.api";
+import { useAppDispatch } from "@/redux/hook";
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
@@ -21,6 +27,16 @@ const navigationLinks = [
 ];
 
 export default function Navbar() {
+    const { data } = useUserInfoQuery(undefined);
+    const [logout] = useLogoutMutation();
+    const dispatch = useAppDispatch();
+    console.log(data?.data?.email);
+
+    const handleLogout = async () => {
+        await logout(undefined);
+        dispatch(authApi.util.resetApiState());
+    };
+
     return (
         <header className="border-b">
             <div className="container mx-auto px-4 flex h-16 items-center justify-between gap-4">
@@ -48,7 +64,7 @@ export default function Navbar() {
                                 >
                                     <path
                                         d="M4 12L20 12"
-                                        className="origin-center -translate-y-1.75 transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-315"
+                                        className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
                                     />
                                     <path
                                         d="M4 12H20"
@@ -56,7 +72,7 @@ export default function Navbar() {
                                     />
                                     <path
                                         d="M4 12H20"
-                                        className="origin-center translate-y-1.75 transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-135"
+                                        className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
                                     />
                                 </svg>
                             </Button>
@@ -100,9 +116,20 @@ export default function Navbar() {
                 {/* Right side */}
                 <div className="flex items-center gap-2">
                     <ModeToggle />
-                    <Button asChild className="text-sm">
-                        <Link to="/login">Login</Link>
-                    </Button>
+                    {data?.data?.email && (
+                        <Button
+                            onClick={handleLogout}
+                            variant="outline"
+                            className="text-sm"
+                        >
+                            Logout
+                        </Button>
+                    )}
+                    {!data?.data?.email && (
+                        <Button asChild className="text-sm">
+                            <Link to="/login">Login</Link>
+                        </Button>
+                    )}
                 </div>
             </div>
         </header>
