@@ -1,8 +1,8 @@
 import { AlertCircleIcon, ImageIcon, UploadIcon, XIcon } from "lucide-react";
 
-import { FileMetadata, useFileUpload } from "@/hooks/use-file-upload";
+import { type FileMetadata, useFileUpload } from "@/hooks/use-file-upload";
 import { Button } from "@/components/ui/button";
-import { Dispatch, useEffect } from "react";
+import { type Dispatch, useEffect } from "react";
 
 export default function MultipleImageUploader({
     onChange,

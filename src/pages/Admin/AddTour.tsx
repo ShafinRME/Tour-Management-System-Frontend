@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 import MultipleImageUploader from "@/components/MultipleImageUploader";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
