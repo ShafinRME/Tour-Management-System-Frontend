@@ -10,8 +10,9 @@ import { adminSidebarItems } from "./adminSidebarItems";
 import { userSidebarItems } from "./userSidebarItems";
 import { withAuth } from "@/utils/withAuth";
 import Unauthorized from "@/pages/Unauthorized";
+import type { TRole } from "@/types";
 import { role } from "@/constants/role";
-import { TRole } from "@/types";
+
 
 export const router = createBrowserRouter([
     {
