@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import SingleImageUploader from "@/components/SingleImageUploader";
 import { Button } from "@/components/ui/button";
 import {
@@ -48,8 +48,11 @@ export function AddDivisionModal() {
 
         try {
             const res = await addDivision(formData).unwrap();
-            toast.success("Division Added");
-            setOpen(false);
+            if (res.success) {
+                toast.success("Division Added");
+                setOpen(false);
+            }
+
         } catch (err) {
             console.error(err);
         }
