@@ -8,10 +8,10 @@ import { generateRoutes } from "@/utils/generateRoutes";
 import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
 import { userSidebarItems } from "./userSidebarItems";
-import { withAuth } from "@/utils/withAuth";
-import Unauthorized from "@/pages/Unauthorized";
 import type { TRole } from "@/types";
 import { role } from "@/constants/role";
+import { withAuth } from "@/utils/withAuth";
+import Unauthorized from "@/pages/Unauthorized";
 
 
 export const router = createBrowserRouter([
